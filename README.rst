@@ -1,5 +1,10 @@
 mimesniff
 =========
+.. image:: https://travis-ci.org/corona10/mimesniff.svg?branch=master
+   :target: https://travis-ci.org/corona10/mimesniff
+
+.. image:: https://img.shields.io/pypi/v/mimesniff.svg?style=flat
+   :target: https://pypi.python.org/pypi/mimesniff
 
 Pure python mimesniff implementation of
 `https://mimesniff.spec.whatwg.org`_
