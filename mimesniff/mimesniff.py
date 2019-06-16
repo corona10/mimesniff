@@ -1,7 +1,6 @@
 # Author: Dong-hee Na
 # Contact: donghee.na92@gmail.com
 from functools import singledispatch
-from os import PathLike
 
 __all__ = ['what']
 
@@ -21,7 +20,6 @@ def what(fin):
 
 
 @what.register(str)
-@what.register(PathLike)
 def _(fin):
     with open(fin, 'rb') as f:
         h = f.read(512)
