@@ -20,6 +20,18 @@ class TestMimesniff(unittest.TestCase):
             fpath = os.path.join(mime_dir, path)
             ret = mimesniff.what(fpath)
             self.assertEqual(expected, ret, '{} should be {} but got {}'.format(fpath, expected, ret))
+            with open(fpath, 'rb') as fin:
+                ret = mimesniff.what(fin)
+                self.assertEqual(expected, ret, '{} should be {} but got {}'.format(fpath, expected, ret))
+
+            with open(fpath, 'rb', buffering=0) as fin:
+                ret = mimesniff.what(fin)
+                self.assertEqual(expected, ret, '{} should be {} but got {}'.format(fpath, expected, ret))
+
+            with open(fpath, 'rb') as fin:
+                header = fin.read(512)
+                ret = mimesniff.what(header)
+                self.assertEqual(expected, ret, '{} should be {} but got {}'.format(fpath, expected, ret))
 
     def test_text(self):
         resources = [

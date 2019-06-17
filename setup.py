@@ -2,7 +2,7 @@ import os
 from os import path
 from setuptools import setup
 
-VERSION = '1.0.1'
+VERSION = '1.1.0'
 
 DESCRIPTION = (
     'Pure python mimesniff implementation of https://mimesniff.spec.whatwg.org'

@@ -1,5 +1,6 @@
 # Author: Dong-hee Na
 # Contact: donghee.na92@gmail.com
+import io
 from functools import singledispatch
 
 __all__ = ['what']
@@ -11,7 +12,9 @@ def what(fin):
     mimesniff.what returns the MIME type of an HTTP response
     through mimesniffing
 
-    :param fin(str, PathLike): File path from which objects will be detected
+    :param fin(str, io.BufferedIOBase, io.RawIOBase,  bytes):
+    File(path, io.BufferedIOBase, io.RawIOBase, bytes) from which objects will
+    be detected
 
     :return: str that represent MIME type
     reference: https://mimesniff.spec.whatwg.org/
@@ -26,6 +29,26 @@ def _(fin):
         res = _detect_content(h)
         if res:
             return res
+    return 'application/octet-stream'
+
+
+@what.register(bytes)
+def _(fin):
+    res = _detect_content(fin)
+    if res:
+        return res
+    return 'application/octet-stream'
+
+
+@what.register(io.BufferedIOBase)
+@what.register(io.RawIOBase)
+def _(fin):
+    location = fin.tell()
+    h = fin.read(512)
+    fin.seek(location)
+    res = _detect_content(h)
+    if res:
+        return res
     return 'application/octet-stream'
 
 
