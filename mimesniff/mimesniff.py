@@ -146,7 +146,7 @@ def _match_mask_sig_types(h, first_non_ws):
     sigs = [
         # (mask, pattern, skip_white_space, mimetype)
         (b'\xFF\xFF\xFF\xFF\xFF', b'<?xml', True, 'text/xml; charset=utf-8'),
-        (b'\xFF\xFF\x00\x00', b'\xFF\xFF\x00\x00', False, 'text/plain; charset=utf-16be'),
+        (b'\xFF\xFF\x00\x00', b'\xFE\xFF\x00\x00', False, 'text/plain; charset=utf-16be'),
         (b'\xFF\xFF\x00\x00', b'\xFF\xFE\x00\x00', False, 'text/plain; charset=utf-16le'),
         (b'\xFF\xFF\xFF\x00', b'\xEF\xBB\xBF\x00', False, 'text/plain; charset=utf-8'),
         (b'\xFF\xFF\xFF\xFF\x00\x00\x00\x00\xFF\xFF\xFF\xFF\xFF\xFF', b'RIFF\x00\x00\x00\x00WEBPVP', False, 'image/webp'),

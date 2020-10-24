@@ -90,6 +90,21 @@ class TestMimesniff(unittest.TestCase):
         ]
         self.check_mime(VIDEO_DIR, resources)
 
+    def test_text_encoded(self):
+        import codecs
+        resources = [
+            ('foo bar'.encode('utf-8'), 'text/plain; charset=utf-8'),
+            (codecs.BOM_UTF16_LE + 'foo bar'.encode('utf-16-le'), 'text/plain; charset=utf-16le'),
+            (codecs.BOM_UTF16_BE + 'foo bar'.encode('utf-16-be'), 'text/plain; charset=utf-16be'),
+            (b'<HTML> Python.org </html>', 'text/html; charset=utf-8'),
+            (b'\n\n<?xml!', 'text/xml; charset=utf-8'),
+        ]
+
+        for data, expected in resources:
+            with self.subTest(data=data):
+                ret = mimesniff.what(data)
+                self.assertEqual(ret, expected)
+
     def test_unsupported_input(self):
         with self.assertRaises(NotImplementedError):
             mimesniff.what(1)
