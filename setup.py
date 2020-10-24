@@ -2,7 +2,7 @@ import os
 from os import path
 from setuptools import setup
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 
 DESCRIPTION = (
     'Pure python mimesniff implementation of https://mimesniff.spec.whatwg.org'
@@ -18,7 +18,8 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8'
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
 ]
 
 readme_dir = path.abspath(path.dirname(__file__))
